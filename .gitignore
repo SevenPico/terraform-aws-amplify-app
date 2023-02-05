@@ -1,0 +1,16 @@
+#  Local .terraform directories
+**/.terraform
+**/.terraform.d
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+.terraform
+.terraform.tfstate.lock.info
+.terraform.lock.hcl
+
+**/.idea
+**/*.iml
+
+**/_fixtures.secrets.auto.tfvars
+examples/costa
