@@ -22,7 +22,7 @@ enabled     = true
 namespace   = "sp"
 environment = "amplify"
 stage       = "jekyll"
-domain_name = "jekyll.7pi.io"
+domain_name = "jekyll.amplify.7pi.io"
 
 #name                = ""
 #delimiter           = var.delimiter

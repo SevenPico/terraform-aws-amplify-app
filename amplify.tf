@@ -33,8 +33,8 @@ locals {
 module "branch_context" {
   for_each = module.context.enabled ? var.branch_configuration : {}
 
-  source     = "app.terraform.io/SevenPico/context/null"
-  version    = "1.1.0"
+  source     = "SevenPico/context/null"
+  version    = "2.0.0"
   context    = module.context.self
   attributes = [each.key]
 }

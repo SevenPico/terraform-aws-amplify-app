@@ -22,7 +22,7 @@ enabled     = true
 namespace   = "sp"
 environment = "amplify"
 stage       = "hello-world"
-domain_name = "hello-world.7pi.io"
+domain_name = "hello-world.amplify.7pi.io"
 
 #name                = ""
 #delimiter           = var.delimiter

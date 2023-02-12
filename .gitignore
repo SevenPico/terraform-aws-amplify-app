@@ -13,4 +13,3 @@
 **/*.iml
 
 **/_fixtures.secrets.auto.tfvars
-examples/costa
