@@ -38,41 +38,44 @@ variable "enable_iam_service_role" {
 variable "branch_configuration" {
   default = {
     master = {
-      basic_auth              = false
-      create_webhook          = true
-      enable_environment      = false
-      enable_performance_mode = true
-      enable_preview          = false
-      environment_variables   = {}
-      framework               = null
-      enable_basic_auth       = false
-      stage                   = "PRODUCTION"
-      domain_name_prefix      = "www"
+      basic_auth                  = false
+      create_webhook              = true
+      enable_environment          = false
+      enable_performance_mode     = true
+      enable_preview              = false
+      enable_pull_request_preview = false
+      environment_variables       = {}
+      framework                   = null
+      enable_basic_auth           = false
+      stage                       = "PRODUCTION"
+      domain_name_prefix          = "www"
     }
     develop = {
-      basic_auth              = false
-      create_webhook          = true
-      enable_environment      = false
-      enable_performance_mode = false
-      enable_preview          = true
-      enable_basic_auth       = false
-      environment_variables   = {}
-      framework               = null
-      stage                   = "DEVELOPMENT"
-      domain_name_prefix      = "www-develop"
+      basic_auth                  = false
+      create_webhook              = true
+      enable_environment          = false
+      enable_performance_mode     = false
+      enable_preview              = true
+      enable_pull_request_preview = false
+      enable_basic_auth           = false
+      environment_variables       = {}
+      framework                   = null
+      stage                       = "DEVELOPMENT"
+      domain_name_prefix          = "www-develop"
     }
   }
   type = map(object({
-    basic_auth              = bool
-    create_webhook          = bool
-    enable_environment      = bool # Required
-    enable_performance_mode = bool
-    enable_preview          = bool
-    enable_basic_auth       = bool
-    environment_variables   = map(string)
-    framework               = any # String - can be null
-    stage                   = string # PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
-    domain_name_prefix      = string
+    basic_auth                  = bool
+    create_webhook              = bool
+    enable_environment          = bool # Required
+    enable_performance_mode     = bool
+    enable_preview              = bool
+    enable_pull_request_preview = bool
+    enable_basic_auth           = bool
+    environment_variables       = map(string)
+    framework                   = any    # String - can be null
+    stage                       = string # PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
+    domain_name_prefix          = string
   }))
   description = "(Optional) Specify Branches to Monitor and Configure."
 }

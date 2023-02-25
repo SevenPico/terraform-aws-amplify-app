@@ -111,6 +111,7 @@ resource "aws_amplify_branch" "default" {
   basic_auth_credentials  = local.basic_auth_creds
   branch_name             = each.key
   display_name            = module.branch_context[each.key].id
+  enable_pull_request_preview = each.value.enable_pull_request_preview
   enable_basic_auth       = each.value.enable_basic_auth
   environment_variables   = each.value.environment_variables
   tags                    = module.branch_context[each.key].tags
