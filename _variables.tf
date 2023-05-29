@@ -152,7 +152,7 @@ variable "custom_rules" {
 }
 
 variable "additional_domain_names" {
-  type = list(string)
+  type = set(string)
   default = []
   description = "(Optional) A list of domain names that should be added to the domain configuration for the Amplify App."
 }
