@@ -21,7 +21,10 @@
 
 
 output "certificate_verification_dns_record" {
-  description = "Stable random number for this example"
-  value       = try(aws_amplify_domain_association.default[0].certificate_verification_dns_record, "")
+  value = try(aws_amplify_domain_association.default[0].certificate_verification_dns_record, "")
+}
+
+output "additional_certificate_verification_dns_records" {
+  value = try({for i in var.additional_domain_names: i => aws_amplify_domain_association.additional[i].certificate_verification_dns_record }, {})
 }
 
