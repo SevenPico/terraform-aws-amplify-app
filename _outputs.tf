@@ -19,17 +19,9 @@
 ##  This file contains code written by SevenPico, Inc.
 ## ----------------------------------------------------------------------------
 
-#output "id" {
-#  description = "ID of the created example"
-#  value       =
-#}
-#
-#output "example" {
-#  description = "Example output"
-#  value       = module.this.enabled ? local.example : null
-#}
-#
-#output "random" {
-#  description = "Stable random number for this example"
-#  value       = module.this.enabled ? join("", random_integer.example[*].result) : null
-#}
+
+output "certificate_verification_dns_record" {
+  description = "Stable random number for this example"
+  value       = try(aws_amplify_domain_association.default[0].certificate_verification_dns_record, "")
+}
+

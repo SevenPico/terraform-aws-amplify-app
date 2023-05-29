@@ -150,3 +150,9 @@ variable "custom_rules" {
   }))
   description = "(Optional) Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below."
 }
+
+variable "additional_domain_names" {
+  type = list(string)
+  default = []
+  description = "(Optional) A list of domain names that should be added to the domain configuration for the Amplify App."
+}

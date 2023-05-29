@@ -145,6 +145,23 @@ resource "aws_amplify_domain_association" "default" {
   }
 }
 
+resource "aws_amplify_domain_association" "additional" {
+  for_each = module.context.enabled ? var.additional_domain_names : []
+
+  app_id                = aws_amplify_app.default[0].id
+  domain_name           = each.key
+  wait_for_verification = false
+
+  dynamic "sub_domain" {
+    for_each = var.branch_configuration
+    iterator = branch
+    content {
+      branch_name = aws_amplify_branch.default[branch.key].branch_name
+      prefix      = branch.value.domain_name_prefix
+    }
+  }
+}
+
 
 #------------------------------------------------------------------------------
 # Amplify Webhooks
