@@ -106,18 +106,18 @@ resource "aws_amplify_backend_environment" "default" {
 resource "aws_amplify_branch" "default" {
   for_each = module.context.enabled ? var.branch_configuration : {}
 
-  app_id                  = aws_amplify_app.default[0].id
-  backend_environment_arn = each.value.enable_environment ? aws_amplify_backend_environment.default[each.key].arn : null
-  basic_auth_credentials  = local.basic_auth_creds
-  branch_name             = each.key
-  display_name            = module.branch_context[each.key].id
+  app_id                      = aws_amplify_app.default[0].id
+  backend_environment_arn     = each.value.enable_environment ? aws_amplify_backend_environment.default[each.key].arn : null
+  basic_auth_credentials      = local.basic_auth_creds
+  branch_name                 = each.key
+  display_name                = module.branch_context[each.key].id
   enable_pull_request_preview = each.value.enable_pull_request_preview
-  enable_basic_auth       = each.value.enable_basic_auth
-  environment_variables   = each.value.environment_variables
-  tags                    = module.branch_context[each.key].tags
-  stage                   = each.value.stage
-  enable_performance_mode = each.value.enable_performance_mode
-  framework               = each.value.framework
+  enable_basic_auth           = each.value.enable_basic_auth
+  environment_variables       = each.value.environment_variables
+  tags                        = module.branch_context[each.key].tags
+  stage                       = each.value.stage
+  enable_performance_mode     = each.value.enable_performance_mode
+  framework                   = each.value.framework
 
   lifecycle {
     ignore_changes = [framework]
