@@ -24,15 +24,15 @@ variable "root_domain" {
 }
 
 variable "github_access_token" {
-  type        = string
+  type = string
 }
 
 variable "github_organization" {
-  type        = string
+  type = string
 }
 
 variable "github_repo" {
-  type        = string
+  type = string
 }
 
 variable "environment_variables" {
@@ -62,4 +62,20 @@ variable "build_spec" {
         paths:
           - node_modules/**/*
   EOT
+}
+
+variable "cors_allowed_origins" {
+  type    = list(string)
+  default = []
+}
+
+variable "geo_restriction_locations" {
+  type        = list(string)
+  default     = []
+  description = "List of country codes for which  CloudFront either to distribute content (whitelist) or not distribute your content (blacklist)"
+}
+
+variable "tls_protocol_version" {
+  type    = string
+  default = "TLSv1.2_2021"
 }
