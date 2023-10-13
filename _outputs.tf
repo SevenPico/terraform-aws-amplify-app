@@ -32,8 +32,8 @@ output "domain_name" {
   value = try(aws_amplify_domain_association.default[0].domain_name, "")
 }
 
-output "id" {
-  value = try(aws_amplify_domain_association.default[0].id, "")
+output "app_name" {
+  value = try(aws_amplify_app.default[0].name, "")
 }
 
 output "sub_domain" {
