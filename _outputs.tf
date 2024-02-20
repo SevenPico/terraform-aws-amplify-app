@@ -25,7 +25,7 @@ output "certificate_verification_dns_record" {
 }
 
 output "additional_certificate_verification_dns_records" {
-  value = try({for i in var.additional_domain_names: i => aws_amplify_domain_association.additional[i].certificate_verification_dns_record }, {})
+  value = try({ for i in var.additional_domain_names : i => aws_amplify_domain_association.additional[i].certificate_verification_dns_record }, {})
 }
 
 output "domain_name" {
@@ -45,10 +45,10 @@ output "sub_domain" {
 }
 
 output "additional_domain_names" {
-  value = try({for i in var.additional_domain_names: i => aws_amplify_domain_association.additional[i].domain_name }, {})
+  value = try({ for i in var.additional_domain_names : i => aws_amplify_domain_association.additional[i].domain_name }, {})
 }
 
 output "additional_sub_domains" {
-  value = try({for i in var.additional_domain_names: i => aws_amplify_domain_association.additional[i].sub_domain }, {})
+  value = try({ for i in var.additional_domain_names : i => aws_amplify_domain_association.additional[i].sub_domain }, {})
 }
 

@@ -24,15 +24,15 @@ variable "root_domain" {
 }
 
 variable "github_access_token" {
-  type        = string
+  type = string
 }
 
 variable "github_organization" {
-  type        = string
+  type = string
 }
 
 variable "github_repo" {
-  type        = string
+  type = string
 }
 
 variable "environment_variables" {
