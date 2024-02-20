@@ -14,10 +14,10 @@ module "site" {
   cors_allowed_origins                    = var.cors_allowed_origins
   geo_restriction_locations               = var.geo_restriction_locations
   parent_zone_id                          = aws_route53_zone.public[0].zone_id
-  s3_access_log_storage_bucket_id         =  "" //var.s3_access_log_storage_bucket_id
-  parent_zone_name = ""
+  s3_access_log_storage_bucket_id         = "" //var.s3_access_log_storage_bucket_id
+  parent_zone_name                        = ""
 
-  tls_protocol_version                    = var.tls_protocol_version
+  tls_protocol_version = var.tls_protocol_version
 
   additional_aliases                = []
   cloudfront_access_logging_enabled = false

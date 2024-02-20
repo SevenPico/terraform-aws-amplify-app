@@ -67,10 +67,10 @@ module "amplify" {
   enable_auto_branch_creation   = true
   enable_basic_auth             = false
   enable_iam_service_role       = true
-  environment_variables         = {
+  environment_variables = {
     AMPLIFY_STORAGE_BUCKET_NAME = module.site.s3_origin_bucket_id
   }
-  github_access_token           = var.github_access_token
-  github_organization           = var.github_organization
-  github_repo                   = var.github_repo
+  github_access_token = var.github_access_token
+  github_organization = var.github_organization
+  github_repo         = var.github_repo
 }
