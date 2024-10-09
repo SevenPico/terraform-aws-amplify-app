@@ -59,7 +59,7 @@ resource "aws_amplify_app" "default" {
   name                        = module.context.id
   repository                  = "https://github.com/${var.github_organization}/${var.github_repo}"
   tags                        = module.context.tags
-  platform                    = "WEB"
+  platform                    = var.platform
 
   auto_branch_creation_patterns = var.auto_branch_creation_patterns
   auto_branch_creation_config {

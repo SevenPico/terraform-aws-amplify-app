@@ -156,3 +156,15 @@ variable "additional_domain_names" {
   default     = []
   description = "(Optional) A list of domain names that should be added to the domain configuration for the Amplify App."
 }
+
+variable "platform" {
+  type    = string
+  default = "WEB"
+
+  description = "(Optional) Platform or framework for an Amplify app. Valid values: WEB, WEB_COMPUTE. Default value: WEB"
+
+  validation {
+    condition     = var.platform == "WEB" || var.platform == "WEB_COMPUTE"
+    error_message = "The platform variable must be either 'WEB' or 'WEB_COMPUTE'."
+  }
+}
