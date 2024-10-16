@@ -168,3 +168,10 @@ variable "platform" {
     error_message = "The platform variable must be either 'WEB' or 'WEB_COMPUTE'."
   }
 }
+
+variable "additional_policy_documents" {
+  type        = list(string)
+  default     = []
+  description = "(Optional) A list of policy documents for the Amplify App role."
+}
+

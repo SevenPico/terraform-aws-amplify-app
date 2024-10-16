@@ -50,7 +50,12 @@ resource "aws_iam_role" "default" {
   #checkov:skip=CKV_AWS_274:skipping 'Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy'
   count = module.iam_context.enabled ? 1 : 0
 
-  assume_role_policy  = join("", data.aws_iam_policy_document.amplify_assume_role.*.json)
+  assume_role_policy  = join("",
+    concat(
+      data.aws_iam_policy_document.amplify_assume_role.*.json,
+      var.additional_policy_documents
+    )
+  )
   managed_policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess"]
   name                = module.iam_context.id
   tags                = module.iam_context.tags
