@@ -63,16 +63,16 @@ resource "aws_amplify_app" "default" {
 
   auto_branch_creation_patterns = var.auto_branch_creation_patterns
   auto_branch_creation_config {
-    basic_auth_credentials      = local.basic_auth_creds
-    build_spec                  = var.build_spec
-    enable_basic_auth           = var.enable_basic_auth
-    enable_auto_build           = true
-    enable_performance_mode     = false
-    enable_pull_request_preview = true
-    environment_variables       = var.environment_variables
-    #    framework                     = ""
-    #    pull_request_environment_name = ""
-    stage = var.auto_branch_stage
+      basic_auth_credentials      = local.basic_auth_creds
+      build_spec                  = var.build_spec
+      enable_basic_auth           = var.enable_basic_auth
+      enable_auto_build           = true
+      enable_performance_mode     = true
+      enable_pull_request_preview = true
+      environment_variables       = var.environment_variables
+      #    framework                     = ""
+      #    pull_request_environment_name = ""
+      stage = var.auto_branch_stage
   }
 
   dynamic "custom_rule" {
