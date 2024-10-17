@@ -157,8 +157,8 @@ resource "aws_amplify_domain_association" "default" {
   }
 
   certificate_settings {
-    type                   = lookup(var.certificate_settings, "type", "AMPLIFY_MANAGED")
-    custom_certificate_arn = lookup(var.certificate_settings, "custom_certificate_arn", null)
+    type                   = var.certificate_settings != null ? lookup(var.certificate_settings, "type", "AMPLIFY_MANAGED") : "AMPLIFY_MANAGED"
+    custom_certificate_arn = var.certificate_settings != null ? lookup(var.certificate_settings, "custom_certificate_arn", null) : null
   }
 }
 
