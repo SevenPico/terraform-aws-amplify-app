@@ -34,30 +34,28 @@ module "iam_context" {
 #------------------------------------------------------------------------------
 # IAM
 #------------------------------------------------------------------------------
-data "aws_iam_policy_document" "amplify_assume_role" {
-  count = module.iam_context.enabled ? 1 : 0
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-    principals {
-      type        = "Service"
-      identifiers = ["amplify.amazonaws.com"]
-    }
+# Create the IAM role using the SevenPico module
+module "iam_role" {
+  source     = "registry.terraform.io/SevenPicoForks/iam-role/aws"
+  version    = "2.0.0"
+  context    = module.iam_context.self
+  attributes = ["role"]
+
+  assume_role_actions    = ["sts:AssumeRole"]
+  principals             = {
+    "Service" : ["amplify.amazonaws.com"]
   }
-}
+  assume_role_conditions  = []
+  instance_profile_enabled = false
+  managed_policy_arns     = ["arn:aws:iam::aws:policy/AdministratorAccess"]
+  max_session_duration    = 3600
+  path                    = "/"
+  permissions_boundary    = ""
+  policy_description      = ""
+  policy_document_count   = 1
+  policy_documents        = var.additional_policy_documents
 
-resource "aws_iam_role" "default" {
-  #checkov:skip=CKV_AWS_274:skipping 'Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy'
-  count = module.iam_context.enabled ? 1 : 0
-
-  assume_role_policy  = join("",
-    concat(
-      data.aws_iam_policy_document.amplify_assume_role.*.json,
-      var.additional_policy_documents
-    )
-  )
-  managed_policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess"]
-  name                = module.iam_context.id
-  tags                = module.iam_context.tags
+  role_description = "The role allows AWS Amplify to assume permissions for managing AWS resources required for deployment and execution of applications."
+  use_fullname     = true
 }
 

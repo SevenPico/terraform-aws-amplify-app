@@ -55,7 +55,7 @@ resource "aws_amplify_app" "default" {
   enable_auto_branch_creation = var.enable_auto_branch_creation
   enable_branch_auto_deletion = var.enable_auto_branch_creation
   environment_variables       = var.environment_variables
-  iam_service_role_arn        = var.enable_iam_service_role ? aws_iam_role.default[0].arn : null
+  iam_service_role_arn        = var.enable_iam_service_role ? module.iam_role.arn : null
   name                        = module.context.id
   repository                  = "https://github.com/${var.github_organization}/${var.github_repo}"
   tags                        = module.context.tags
