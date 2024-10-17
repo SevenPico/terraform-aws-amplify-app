@@ -40,19 +40,19 @@ module "iam_role" {
   context    = module.iam_context.self
   attributes = ["role"]
 
-  assume_role_actions    = ["sts:AssumeRole"]
-  principals             = {
+  assume_role_actions = ["sts:AssumeRole"]
+  principals = {
     "Service" : ["amplify.amazonaws.com"]
   }
-  assume_role_conditions  = []
+  assume_role_conditions   = []
   instance_profile_enabled = false
-  managed_policy_arns     = ["arn:aws:iam::aws:policy/AdministratorAccess"]
-  max_session_duration    = 3600
-  path                    = "/"
-  permissions_boundary    = ""
-  policy_description      = ""
-  policy_document_count   = 1
-  policy_documents        = var.additional_policy_documents
+  managed_policy_arns      = ["arn:aws:iam::aws:policy/AdministratorAccess"]
+  max_session_duration     = 3600
+  path                     = "/"
+  permissions_boundary     = ""
+  policy_description       = ""
+  policy_document_count    = 1
+  policy_documents         = var.additional_policy_documents
 
   role_description = "The role allows AWS Amplify to assume permissions for managing AWS resources required for deployment and execution of applications."
   use_fullname     = true

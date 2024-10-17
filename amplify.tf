@@ -156,12 +156,9 @@ resource "aws_amplify_domain_association" "default" {
     }
   }
 
-  dynamic "certificate_settings" {
-    for_each = var.certificate_settings != null ? [1] : []
-    content {
-      type = lookup(var.certificate_settings, "type", "AMPLIFY_MANAGED")
-      custom_certificate_arn = lookup(var.certificate_settings, "custom_certificate_arn", null)
-    }
+  certificate_settings {
+    type                   = lookup(var.certificate_settings, "type", "AMPLIFY_MANAGED")
+    custom_certificate_arn = lookup(var.certificate_settings, "custom_certificate_arn", null)
   }
 }
 
