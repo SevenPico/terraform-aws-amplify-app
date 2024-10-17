@@ -86,6 +86,11 @@ resource "aws_amplify_app" "default" {
     }
   }
 
+  lifecycle {
+    ignore_changes = [
+      auto_branch_creation_config[0].enable_performance_mode
+    ]
+  }
 }
 
 
@@ -160,6 +165,8 @@ resource "aws_amplify_domain_association" "additional" {
       prefix      = branch.value.domain_name_prefix
     }
   }
+
+
 }
 
 

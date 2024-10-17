@@ -34,7 +34,6 @@ module "iam_context" {
 #------------------------------------------------------------------------------
 # IAM
 #------------------------------------------------------------------------------
-# Create the IAM role using the SevenPico module
 module "iam_role" {
   source     = "registry.terraform.io/SevenPicoForks/iam-role/aws"
   version    = "2.0.0"
