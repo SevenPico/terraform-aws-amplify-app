@@ -62,17 +62,22 @@ resource "aws_amplify_app" "default" {
   platform                    = var.platform
 
   auto_branch_creation_patterns = var.auto_branch_creation_patterns
-  auto_branch_creation_config {
-      basic_auth_credentials      = local.basic_auth_creds
-      build_spec                  = var.build_spec
-      enable_basic_auth           = var.enable_basic_auth
-      enable_auto_build           = true
-      enable_performance_mode     = true
-      enable_pull_request_preview = true
-      environment_variables       = var.environment_variables
-      #    framework                     = ""
-      #    pull_request_environment_name = ""
-      stage = var.auto_branch_stage
+
+  dynamic "auto_branch_creation_config" {
+    for_each = var.auto_branch_creation_config != null ? [true] : []
+
+    content {
+      basic_auth_credentials        = lookup(var.auto_branch_creation_config, "basic_auth_credentials", null)
+      build_spec                    = lookup(var.auto_branch_creation_config, "build_spec", null)
+      enable_auto_build             = lookup(var.auto_branch_creation_config, "enable_auto_build", null)
+      enable_basic_auth             = lookup(var.auto_branch_creation_config, "enable_basic_auth", null)
+      enable_performance_mode       = lookup(var.auto_branch_creation_config, "enable_performance_mode", null)
+      enable_pull_request_preview   = lookup(var.auto_branch_creation_config, "enable_pull_request_preview", null)
+      environment_variables         = lookup(var.auto_branch_creation_config, "environment_variables", null)
+      framework                     = lookup(var.auto_branch_creation_config, "framework", null)
+      pull_request_environment_name = lookup(var.auto_branch_creation_config, "pull_request_environment_name", null)
+      stage                         = lookup(var.auto_branch_creation_config, "stage", null)
+    }
   }
 
   dynamic "custom_rule" {
@@ -88,7 +93,9 @@ resource "aws_amplify_app" "default" {
 
   lifecycle {
     ignore_changes = [
-      auto_branch_creation_config[0].enable_performance_mode
+      # BUG: Unchanged values of following forces redeployment, hence we will ignore their changes. To update them, destroy and recreate the resource.
+      auto_branch_creation_config[0].enable_performance_mode,
+      basic_auth_credentials
     ]
   }
 }
@@ -148,6 +155,14 @@ resource "aws_amplify_domain_association" "default" {
       prefix      = branch.value.domain_name_prefix
     }
   }
+
+  dynamic "certificate_settings" {
+    for_each = var.certificate_settings != null ? [1] : []
+    content {
+      type = lookup(var.certificate_settings, "type", "AMPLIFY_MANAGED")
+      custom_certificate_arn = lookup(var.certificate_settings, "custom_certificate_arn", null)
+    }
+  }
 }
 
 resource "aws_amplify_domain_association" "additional" {
@@ -165,8 +180,6 @@ resource "aws_amplify_domain_association" "additional" {
       prefix      = branch.value.domain_name_prefix
     }
   }
-
-
 }
 
 

@@ -175,3 +175,28 @@ variable "additional_policy_documents" {
   description = "(Optional) A list of policy documents for the Amplify App role."
 }
 
+variable "auto_branch_creation_config" {
+  type = object({
+    basic_auth_credentials        = optional(string)
+    build_spec                    = optional(string)
+    enable_auto_build             = optional(bool)
+    enable_basic_auth             = optional(bool)
+    enable_performance_mode       = optional(bool)
+    enable_pull_request_preview   = optional(bool)
+    environment_variables         = optional(map(string))
+    framework                     = optional(string)
+    pull_request_environment_name = optional(string)
+    stage                         = optional(string)
+  })
+  description = "The automated branch creation configuration for the Amplify app"
+  default     = null
+}
+
+variable "certificate_settings" {
+  description = "Settings for configuring the certificate for the Amplify app. Includes the type of certificate and optionally a custom certificate ARN."
+  type = object({
+    type                   = string
+    custom_certificate_arn = optional(string)
+  })
+  default = null
+}
